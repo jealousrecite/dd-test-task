@@ -37,6 +37,11 @@ public class Tokenizer {
         var stringWithNumberSkipped = s.substring(numberEndIndex);
         var bracketEndIndex = skipBracket(stringWithNumberSkipped);
 
+        // failed to find any valid token in the nonempty string
+        if (numberEndIndex == 0 || bracketEndIndex == 0) {
+            throw new IllegalArgumentException("Failed to tokenize '" + s + "'");
+        }
+
         return numberEndIndex + bracketEndIndex;
     }
 
@@ -49,11 +54,11 @@ public class Tokenizer {
     }
 
     public static int skipBracket(String s) {
-        if (s.isEmpty()) {
+        if (s.isEmpty() || (s.charAt(0) != '[')) {
             return 0;
         }
 
-        var bracketCounter = (s.charAt(0) == '[') ? 1 : 0;
+        var bracketCounter = 1;
         var endIndex = 1;
 
         while (endIndex < s.length() && bracketCounter > 0) {
