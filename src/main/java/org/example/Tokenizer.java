@@ -40,15 +40,15 @@ public class Tokenizer {
         return numberEndIndex + bracketEndIndex;
     }
 
-    private static int skipWord(String s) {
+    public static int skipWord(String s) {
         return skipByPredicate(s, Character::isAlphabetic);
     }
 
-    private static int skipNumber(String s) {
+    public static int skipNumber(String s) {
         return skipByPredicate(s, Character::isDigit);
     }
 
-    private static int skipBracket(String s) {
+    public static int skipBracket(String s) {
         if (s.isEmpty()) {
             return 0;
         }
