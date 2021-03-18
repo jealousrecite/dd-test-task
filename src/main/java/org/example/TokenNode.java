@@ -9,18 +9,22 @@ public class TokenNode {
     private final int repetitionCount;
     private final List<TokenNode> children;
 
-    public TokenNode(String s) {
-        s = s.trim();
+    public static TokenNode makeTree(String s) {
+        // create artificial root node
+        return new TokenNode("1[" + s + "]");
+    }
 
-        rawValue = s;
+    private TokenNode(String s) {
 
         if (isPlainString(s)) {
 
+            rawValue = s;
             repetitionCount = 1;
             children = null;
 
         } else if (isPackedString(s)) {
 
+            rawValue = null;
             var countEndIndex = Tokenizer.skipNumber(s);
             repetitionCount = Integer.parseInt(s.substring(0, countEndIndex));
             // trim number
@@ -33,7 +37,9 @@ public class TokenNode {
                     .map(TokenNode::new)
                     .collect(Collectors.toList());
         } else {
+
             throw new IllegalArgumentException("Provided string is not a valid token");
+
         }
 
     }
@@ -55,7 +61,7 @@ public class TokenNode {
 
     public String unpackTree() {
         // if the token is a plain string
-        if(children == null) {
+        if (children == null) {
             return rawValue;
         }
 
