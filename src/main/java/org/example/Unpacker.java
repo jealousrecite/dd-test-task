@@ -9,7 +9,7 @@ public class Unpacker {
         System.out.println("Demo Result: " + unpack(testData));
     }
 
-    public static String unpack(String s) {
+    public static String unpack(String s) throws IllegalArgumentException {
         return TokenNode.makeTree(s)
                 .unpackTree();
     }
