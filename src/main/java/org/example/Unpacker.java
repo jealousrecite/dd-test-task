@@ -4,15 +4,15 @@ package org.example;
 public class Unpacker {
 
     public static void main(String[] args) {
-        if (args.length == 2) {
-            var userInput = args[1];
+        if (args.length == 1) {
+            var userInput = args[0];
             try {
                 System.out.println(Unpacker.unpack(userInput) + "\n");
             } catch (IllegalArgumentException e) {
                 System.out.println("Invalid input\n"
                         + e.getMessage() + "\n");
             }
-        } else if (args.length > 2) {
+        } else if (args.length > 1) {
             System.out.println("Too many arguments\n");
             System.out.println(getExample());
         } else {
